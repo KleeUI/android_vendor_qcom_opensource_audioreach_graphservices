@@ -30,7 +30,10 @@ LOCAL_SRC_FILES := src/gsl_main.c \
     src/gsl_dls_client.c\
     src/gsl_cshm_mgr.c
 
-LOCAL_HEADER_LIBRARIES := libspf-headers
+LOCAL_HEADER_LIBRARIES := \
+    libspf-headers \
+    libarosal_headers \
+    libacdb_headers
 LOCAL_SHARED_LIBRARIES := \
     liblx-osal\
     libar-acdb\
