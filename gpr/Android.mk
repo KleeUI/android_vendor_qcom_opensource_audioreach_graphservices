@@ -28,6 +28,8 @@ LOCAL_SHARED_LIBRARIES := \
     libcutils\
     liblog
 
+LOCAL_HEADER_LIBRARIES := libarosal_headers
+
 LOCAL_C_INCLUDES := \
     $(LOCAL_PATH)/inc \
     $(LOCAL_PATH)/logging/inc \

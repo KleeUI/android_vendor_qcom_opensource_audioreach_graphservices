@@ -17,7 +17,9 @@ LOCAL_SHARED_LIBRARIES := \
     liblx-osal
 
 LOCAL_CFLAGS := -D_ANDROID_
-LOCAL_HEADER_LIBRARIES := libspf-headers
+LOCAL_HEADER_LIBRARIES := \
+    libspf-headers \
+    libarosal_headers
 LOCAL_C_INCLUDES := $(LOCAL_PATH)/api \
                     $(LOCAL_PATH)/inc
 
