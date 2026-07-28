@@ -1,5 +1,9 @@
 LOCAL_PATH := $(call my-dir)
 
+# Products with an ABI-matched Soong prebuilt may disable this Make module.
+# Other products retain the source build until the full stack moves to Soong.
+ifneq ($(TARGET_USES_PREBUILT_AUDIOREACH_GRAPH_SERVICES),true)
+
 include $(CLEAR_VARS)
 
 #----------------------------------------------------------------------------
@@ -94,3 +98,5 @@ LOCAL_SHARED_LIBRARIES += libcutils
 LOCAL_HEADER_LIBRARIES += vendor_common_inc
 
 include $(BUILD_SHARED_LIBRARY)
+
+endif

@@ -1,4 +1,9 @@
 LOCAL_PATH := $(call my-dir)
+
+# Products with ABI-matched AudioReach prebuilts can disable the overlapping
+# Make modules until the complete graphservices stack is migrated as one unit.
+ifneq ($(TARGET_USES_PREBUILT_AUDIOREACH_GRAPH_SERVICES),true)
+
 include $(CLEAR_VARS)
 
 #----------------------------------------------------------------------------
@@ -135,6 +140,8 @@ LOCAL_EXPORT_C_INCLUDE_DIRS += $(LOCAL_PATH)/ats/adie/common/api
 LOCAL_EXPORT_C_INCLUDE_DIRS += $(LOCAL_PATH)/ats/mcs/common/api
 
 include $(BUILD_SHARED_LIBRARY)
+
+endif
 
 include $(CLEAR_VARS)
 
