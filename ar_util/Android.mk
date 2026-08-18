@@ -1,4 +1,6 @@
 LOCAL_PATH := $(call my-dir)
+
+ifneq ($(TARGET_USES_PREBUILT_AUDIOREACH_GRAPH_SERVICES),true)
 include $(CLEAR_VARS)
 
 LOCAL_MODULE := liblx-ar_util
@@ -58,3 +60,5 @@ LOCAL_C_INCLUDES := $(LOCAL_PATH)/api \
                     $(LOCAL_PATH)/inc
 
 include $(BUILD_EXECUTABLE)
+
+endif

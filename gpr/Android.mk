@@ -1,4 +1,6 @@
 LOCAL_PATH := $(call my-dir)
+
+ifneq ($(TARGET_USES_PREBUILT_AUDIOREACH_GRAPH_SERVICES),true)
 include $(CLEAR_VARS)
 
 LOCAL_MODULE := libar-gpr
@@ -52,3 +54,5 @@ LOCAL_CFLAGS += -DPLATFORM_SLATE
 endif
 
 include $(BUILD_SHARED_LIBRARY)
+
+endif
