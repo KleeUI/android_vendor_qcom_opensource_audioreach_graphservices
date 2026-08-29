@@ -20,3 +20,17 @@ cc_library_headers {
     ],
     vendor: true,
 }
+
+// ATS is consumed by the source AGM runtime.  Keep its public include
+// boundary explicit so clients do not depend on a prebuilt libats exporting
+// headers as a side effect.
+cc_library_headers {
+    name: "libats_headers",
+    export_include_dirs: [
+        "ats/api",
+        "ats/inc",
+        "ats/adie/common/api",
+        "ats/mcs/common/api",
+    ],
+    vendor: true,
+}
