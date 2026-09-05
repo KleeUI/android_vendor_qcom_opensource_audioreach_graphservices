@@ -395,8 +395,24 @@ int32_t gsl_do_load_bootup_dyn_modules(uint32_t master_proc,
 			if (load_cmd->error_code != AR_EOK) {
 				GSL_ERR("load cmd failed: spf status %d",
 					load_cmd->error_code);
+				/*
+				 * Cupid's shipped SPF rejects the source ACDB bootup
+				 * module blob with AR_EFAILED.  The modules are optional
+				 * until a graph is opened, so leave the registration clean
+				 * and let the caller continue with the static graph set.
+				 * Transport, allocation, and registration failures still
+				 * propagate normally through the paths above.
+				 */
+				if (load_cmd->error_code == AR_EFAILED) {
+					GSL_ERR("source bootup modules rejected by SPF; continuing without preloaded modules");
+					rc = AR_EOK;
+					__gpr_cmd_free(p_rsp_pkt);
+					p_rsp_pkt = NULL;
+					goto undo_module_registration;
+				}
 				rc = AR_EFAILED;
 				__gpr_cmd_free(p_rsp_pkt);
+				p_rsp_pkt = NULL;
 				goto undo_module_registration;
 			}
 
