@@ -256,7 +256,10 @@ cc_library_shared {
     cflags: [
         "-D_ANDROID_",
         "-DAR_ATS_USE_CUTILS",
-        "-DMCS_ENABLED",
+        // Cupid's proprietary libmcs is ABI-locked to the stock AudioReach
+        // closure. Keep the open ATS implementation source-built, but leave
+        // the optional MCS adapter disabled until a matching source backend
+        // exists; otherwise ATS dlopen()s an incompatible libmcs.so.
     ],
     local_include_dirs: [
         "acdb/ats/inc",

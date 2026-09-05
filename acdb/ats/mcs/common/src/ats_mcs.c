@@ -888,6 +888,10 @@ int32_t ats_mcs_init(void)
 {
     ATS_INFO("Registering Media Control Service...");
 
+#ifndef MCS_ENABLED
+    ATS_INFO("Media Control Service disabled: no ABI-matched MCS backend");
+    return AR_ENOTIMPL;
+#else
     int32_t status = AR_EOK;
 
     status = mcs_init();
@@ -906,10 +910,14 @@ int32_t ats_mcs_init(void)
     }
 
     return status;
+#endif
 }
 
 int32_t ats_mcs_deinit(void)
 {
+#ifndef MCS_ENABLED
+    return AR_EOK;
+#else
     ATS_INFO("Deregistering Media Control Service...");
 
     int32_t status = AR_EOK;
@@ -929,6 +937,7 @@ int32_t ats_mcs_deinit(void)
     }
 
     return status;
+#endif
 }
 
 int32_t ats_mcs_get_version(uint32_t* major, uint32_t* minor)
